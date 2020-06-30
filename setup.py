@@ -1,16 +1,7 @@
-from setuptools import setup
+import setuptools
 
-setup(
+setuptools.setup(
     name='django-configurations-ec2',
-    version='2020.6.1',
-    install_requires=[
-        'boto3',
-        'django-configurations',
-        'requests',
-        'setuptools',
-        'watchtower',
-    ],
-    packages=[
-        'django_configurations_ec2',
-    ],
+    install_requires=open('requirements.txt').read().splitlines(),
+    packages=setuptools.find_packages()
 )
