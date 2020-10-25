@@ -13,20 +13,29 @@ $ [sudo] pip install django-configurations-ec2
 ```
 
 #### Features
-+   `ALLOWED_HOSTS` - appends EC2 private ip
-+   `LOGGING` - CloudWatch logs
++   `ALLOWED_HOSTS` - EC2 private ip
++   `LOGGING` - CloudWatch logging
 
 ##### `settings.py`
 ```python
-from django_configurations_ec2 import EC2Configuration
+from configurations import Configuration
+from django_configurations_ec2 import AllowedHostsMixin, LoggingMixin
 
-class Prod(EC2Configuration,...):
+class Prod(AllowedHostsMixin,Configuration):
     ALLOWED_HOSTS=['.domain.com']
+```
+
+CloudWatch
+```python
+from configurations import Configuration
+from django_configurations_ec2 import LoggingMixin
+
+class Prod(LoggingMixin,Configuration):
+    ...
 ```
 
 ##### `.env`
 ```bash
-DJANGO_AWS_CLOUDWATCH_ENABLED=true # optional, default true
 DJANGO_AWS_ACCESS_KEY_ID=ACCESS_KEY_ID
 DJANGO_AWS_SECRET_ACCESS_KEY=SECRET_ACCESS_KEY
 DJANGO_AWS_REGION_NAME=REGION_NAME
